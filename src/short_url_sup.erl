@@ -41,7 +41,7 @@ upgrade() ->
 %% @spec init([]) -> SupervisorTree
 %% @doc supervisor callback.
 init([]) ->
-    Web = web_specs(short_url_web, 8080),
+    Web = web_specs(short_url_web, 80),
     Processes = [Web],
     Strategy = {one_for_one, 10, 10},
     {ok,
