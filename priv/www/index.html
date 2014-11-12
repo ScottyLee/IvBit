@@ -18,32 +18,39 @@
 
 <script type="text/javascript">
 
-function SelectText(element) {
-    var text = document.getElementById(element);
-    if ($.browser.msie) {
-        var range = document.body.createTextRange();
-        range.moveToElementText(text);
-        range.select();
-    } else if ($.browser.mozilla || $.browser.opera) {
-        var selection = window.getSelection();
-        var range = document.createRange();
-        range.selectNodeContents(text);
-        selection.removeAllRanges();
-        selection.addRange(range);
-    } else if ($.browser.safari) {
-        var selection = window.getSelection();
-        selection.setBaseAndExtent(text, 0, text, 1);
+    function SelectText(element) {
+        var text = document.getElementById(element);
+        if ($.browser.msie) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if ($.browser.mozilla || $.browser.opera) {
+            var selection = window.getSelection();
+            var range = document.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        } else if ($.browser.safari) {
+            var selection = window.getSelection();
+            selection.setBaseAndExtent(text, 0, text, 1);
+        }
     }
-}
 
+    function check_url (url) {
+      var urlData = url.split("/");
+      if (urlData[0] != "http:") 
+      {
+        if (urlData[0] != "https:") {
+          return "https://" + url
+        }
+        return "http://" + url
+      }
+      return url;
+    }
 
     function show_modal () 
     {
-      red_url = $('#url_for_cut').val();
-      if (red_url.substring(0, 7) != "http://" || red_url.substring(0, 8) != "https://") 
-      {
-        red_url = "http://" + red_url
-      }
+      red_url = check_url ( $('#url_for_cut').val() ) ;
       $.ajax({
               url:"http://cnp.su/reduce",
               type: "POST",
