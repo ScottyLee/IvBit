@@ -1,0 +1,9 @@
+%% -*- erlang -*-
+{application, short_url,
+ [{description, "short_url"},
+  {vsn, "0.1"},
+  {modules, []},
+  {registered, []},
+  {mod, {'short_url_app', []}},
+  {env, []},
+  {applications, [kernel, stdlib, crypto]}]}.

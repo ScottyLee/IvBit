@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Headers</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="shortcut icon" href="flat-ui/images/favicon.ico">
+    <link rel="stylesheet" href="flat-ui/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="flat-ui/bootstrap/css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="flat-ui/css/flat-ui.css">
+    <!-- Using only with Flat-UI (free)-->
+    <!-- <link rel="stylesheet" href="common-files/css/icon-font.css"> -->
+    <!-- end -->
+    <link rel="stylesheet" href="common-files/css/animations.css">
+    <link rel="stylesheet" href="ui-kit/ui-kit-header/css/ui-kit-styles.css">
+
+<script type="text/javascript">
+
+function SelectText(element) {
+    var text = document.getElementById(element);
+    if ($.browser.msie) {
+        var range = document.body.createTextRange();
+        range.moveToElementText(text);
+        range.select();
+    } else if ($.browser.mozilla || $.browser.opera) {
+        var selection = window.getSelection();
+        var range = document.createRange();
+        range.selectNodeContents(text);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    } else if ($.browser.safari) {
+        var selection = window.getSelection();
+        selection.setBaseAndExtent(text, 0, text, 1);
+    }
+}
+
+
+    function show_modal () 
+    {
+      red_url = $('#url_for_cut').val();
+      if (red_url.substring(0, 7) != "http://" || red_url.substring(0, 8) != "https://") 
+      {
+        red_url = "http://" + red_url
+      }
+      $.ajax({
+              url:"http://127.0.0.1:8080/reduce",
+              type: "POST",
+              dataType: "xml/html/script/json", // expected format for response
+              contentType: "application/json", // send as JSON
+              data: red_url,
+
+              complete: function(data) {
+                    $('#short_link').html(data.responseText).focus().select();
+                    $('#url_for_cut').val("");
+                    $('#myModal').modal();
+              },              
+            });
+    }
+</script>
+</head>
+
+<body>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+        <h4 class="modal-title" id="myModalLabel">Сокращенная ссылка</h4>
+      </div>
+      <div class="modal-body">
+        <div class="highlight"><pre><code id="short_link">Some code/text goes here</code></pre></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<section class="header-14-sub bg-midnight-blue">
+      <div class="background">&nbsp;</div>
+      <div class="container">
+        <div class="row">
+          <div class="span8 offset2">
+            <div class="header-14">
+              <span class="fui-cmd"> </span>
+              <div>CUT AND PASTE</div>
+            </div>
+            <h3>Укорачиватель ссылок</h3>
+            <p>
+              Вставте ссылку в поле и нажмите "сократить"
+            </p>
+            <div class="subscribe-form">
+              <form class="">
+                <div class="input-append">
+                  <input type="text" class="span4" id="url_for_cut">
+                  <button class="btn btn-primary" type="button" onclick="show_modal()">Сократить</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+<!-- Placed at the end of the document so the pages load faster -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="flat-ui/js/bootstrap.min.js"></script>
+    <script src="common-files/js/modernizr.custom.js"></script>
+    <script src="common-files/js/page-transitions.js"></script>
+    <script src="common-files/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+    <script src="common-files/js/startup-kit.js"></script>
+  </body>
+</html>    
