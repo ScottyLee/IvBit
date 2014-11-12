@@ -10,27 +10,30 @@
 - **Make**
 
 ## Установка Git Core
-nix: **sudo apt-get install** git-core
-osX: **sudo port install** git-core (для macports)
-		 **brew install** git-core (для homebrew)
+
+    nix: sudo apt-get install git-core
+    OSX: sudo port install git-core (для macports)
+    OSX: brew install git-core (для homebrew)
 
 ## Установка Erlang
-nix: **sudo apt-get install** erlang
-osX: **sudo port install** erlang (для macports)
-		 **brew install** erlang (для homebrew)
 
+    nix: sudo apt-get install erlang
+    OSX: sudo port install erlang (для macports)
+    OSX: brew install erlang (для homebrew)
+    	 
 ## Установка Make
-nix: **sudo apt-get install** make
-osX: **sudo port install** make (для macports)
-	     **brew install** make (для homebrew)
+
+    nix: sudo apt-get install make
+    OSX: sudo port install make (для macports)
+    OSX: brew install make (для homebrew)
+
 
 После всех проделанных манипуляций, просто переходим в требуемую папку и выполняем:
 
-$ **git clone** https://github.com/ScottyLee/IvBit
+    $ git clone https://github.com/ScottyLee/IvBit
+    $ cd IvBit
+    $ make
 
-$ **cd** IvBit
-
-$ **make**
 
 если на прошлых шагах вы все сделали правильно, то у вас запустится процесс сборки и скачивания зависимостей, после чего вы получите полностью скомпилированный проект, далее Вам нужно только запустить исполняемый файл **start-dev.sh** и сервер будет запущен.
 
