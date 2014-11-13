@@ -37,20 +37,24 @@
     }
 
     function check_url (url) {
-      var urlData = url.split("/");
-      if (urlData[0] != "http:") 
-      {
-        if (urlData[0] != "https:") {
-          return "https://" + url
+      var arr = url.split("/");
+        if (arr.length == 2) 
+        {
+          return arr[0] + "//" + arr[1];
+        };
+
+        if (arr.length == 1) 
+        {
+          return "http://" + arr[0];
         }
-        return "http://" + url
-      }
-      return url;
+        
+        return url;
     }
 
     function show_modal () 
     {
       red_url = check_url ( $('#url_for_cut').val() ) ;
+      alert(red_url);
       $.ajax({
               url:"http://cnp.su/reduce",
               type: "POST",
